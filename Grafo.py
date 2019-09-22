@@ -77,10 +77,6 @@ class Grafo:
             for aresta in arestas:
                 print("-- Destino: ",aresta.getDestino(), " peso: ",aresta.getPeso())
 
-
-
-    
-
     '''def numVertice(self,id):
         contador = 0
         for vert in self.lista_Vertices:
