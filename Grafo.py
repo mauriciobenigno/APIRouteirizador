@@ -77,7 +77,7 @@ class Grafo:
             for aresta in arestas:
                 print("-- Destino: ",aresta.getDestino(), " peso: ",aresta.getPeso())
 
-    '''def numVertice(self,id):
+    def numVertice(self,id):
         contador = 0
         for vert in self.lista_Vertices:
             if vert.getId() == id:
@@ -85,31 +85,33 @@ class Grafo:
             contador=contador+1
 
     def dijsktra(self, Grafo, pontoInicio):
-        distancias = [len(self.lista_Vertices)]
-        navegador = self.lista_Vertices[0]
-        historico = []  
-        vert = 0
+        visitados = []
+        nao_visitados = self.lista_Vertices
+        distancia = [len(self.lista_Vertices)]
+        antecessor = [len(self.lista_Vertices)]
+        atual = self.numVertice(pontoInicio.getId())
 
-        for i in range(len(distancias)):
-            distancias[i] = sys.maxint
+        for i in range(1,len(self.lista_Vertices)):
+            distancia[i]=sys.maxsize # adiciona o valor maximo de um Int a posicao
+        distancia[atual] = 0
 
-        distancias[0] = 0 # a posicao 0 é sempre a inicial e a ultima posicao do vetor é a final
-        predecessor = []
-        predecessor.append ((navegador,distancias[0]))
-
-        while len(predecessor) > 0:
-            vert=vert+1
-            predecessor.pop
-            for j in range(0 , len(navegador.getArestas())):
-                arestasAux = navegador.getArestas()
-                peso = arestasAux[i]
-                pesoanterior = distancias[self.numVertice(arestasAux.getId())]
-
-                if peso < pesoanterior:'''
-
-        
-
-
+        while len(nao_visitados) > 0:
+            valor_minimo = sys.maxsize
+            proximo = None
+            for arest in nao_visitados[atual]:
+                if valor_minimo > arest.getPeso():
+                    valor_minimo = arest.getPeso()
+                    proximo = arest.getDestino()
+                    distancia[self.numVertice(proximo)] = valor_minimo
+                    antecessor[self.numVertice(proximo)] = nao_visitados[atual]
+                else:
+                    distancia[self.numVertice(proximo)] = arest.getPeso()
+                    antecessor[self.numVertice(proximo)] = nao_visitados[atual] 
+            
+            visitados.append(self.numVertice(atual))
+            nao_visitados.remove(atual)
+            atual = self.numVertice(proximo)
+ 
     '''def minDist(self,distancia,visitado):
         min = sys.maxint
         minIndex = None
